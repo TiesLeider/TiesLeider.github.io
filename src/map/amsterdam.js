@@ -38,7 +38,6 @@ require([
     }
   });
 
-
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
@@ -59,7 +58,7 @@ require([
       // don't show legend twice
       item.panel = {
         content: "legend",
-        open: true,
+        open: false,
       };
     }
   }

@@ -4,3 +4,7 @@ html, body, #viewDiv {
   height: 100%;
   width: 100%;
 }
+
+.esri-layer-list__item {
+  border-bottom: none;
+}

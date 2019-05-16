@@ -75,6 +75,6 @@ p {
   }
 
   #viewDiv {
-    height: 100%;
+    height: -webkit-fill-available;
   }
 }

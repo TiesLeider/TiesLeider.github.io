@@ -1,0 +1,47 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: whitesmoke;
+}
+
+.header {
+  height: 5rem;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+}
+
+.link {
+  margin: 0;
+  padding: 1.9rem;
+  color: #dfdfdf;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.box {
+  box-shadow: 0 4px 10px 0 rgba(64, 25, 100, 0.15);
+  border-radius: 0.625rem;
+  padding: 2rem;
+  background: white;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+p {
+    margin: 0;
+}

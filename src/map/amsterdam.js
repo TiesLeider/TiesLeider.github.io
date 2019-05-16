@@ -30,14 +30,13 @@ require([
 
  var milieuzone = new GeoJSONLayer({
    url: "https://map.data.amsterdam.nl/maps/milieuzones?service=WFS&request=GetFeature&version=2.0.0&typenames=milieuzones&outputformat=geojson&srsname=epsg:4326",
-   copyright: "Vrachtroute Stadsdeel Centrum >7.5 ton",
    title: "Milieuzone",
    renderer: {
      type: "unique-value",
      defaultSymbol: symbology("simple-fill", [125, 255, 13, 0.2], "1px", "solid"),
      defaultLabel: "Milieuzone"
-   }
-});
+    }
+  });
 
 
   var map = new Map({
@@ -68,8 +67,8 @@ require([
 
   view.ui.add(legend, "bottom-left");
   view.when(function() {
-    vrachtRoutesLayer.when(function() {
-      view.goTo(vrachtRoutesLayer.fullExtent);
+    milieuzone.when(function() {
+      view.goTo(milieuzone.fullExtent);
     });
   });
 });

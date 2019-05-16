@@ -1,0 +1,18 @@
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.esri-layer-list__item {
+  border-bottom: none;
+}
+
+#viewDiv {
+  height: calc(100% - 5rem);
+}
+
+.esri-view-surface:after {
+  outline: none !important;
+}

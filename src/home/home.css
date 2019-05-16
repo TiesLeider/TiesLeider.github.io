@@ -1,0 +1,21 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  height: 5rem;
+  background-color: black;
+  padding: 0 5rem;
+}
+
+.p-footer {
+  color: white;
+  padding: 1.9rem;
+}
+
+.content {
+  margin: 5rem 6.9rem;
+  height: calc(100% - 20rem);
+}
+
+h1 {
+  margin-bottom: 3rem;
+}

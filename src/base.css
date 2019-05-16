@@ -7,7 +7,7 @@ html, body {
 }
 
 .header {
-  height: 5rem;
+  height: fit-content;
   background-color: black;
   display: flex;
   justify-content: space-between;
@@ -16,7 +16,7 @@ html, body {
 
 .link {
   margin: 0;
-  padding: 1.9rem;
+  padding: 1.8rem;
   color: #dfdfdf;
   cursor: pointer;
   outline: none;
@@ -44,4 +44,37 @@ html, body {
 
 p {
     margin: 0;
+}
+
+#viewDiv {
+  height: calc(100% - 5rem);
+}
+
+
+.content {
+  margin: 5rem 6.8rem 0;
+}
+
+@media screen and (max-width: 913px) {
+  .header {
+    flex-flow: column;
+  }
+
+  .link {
+    color: white;
+    text-align: center;
+  }
+
+  .link:not(:last-child) {
+    border-bottom: #4e4e4e 1px solid;
+    margin: 0 -4rem;
+  }
+
+  .content {
+      margin: 5rem 2rem 0;
+  }
+
+  #viewDiv {
+    height: 100%;
+  }
 }

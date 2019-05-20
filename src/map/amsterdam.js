@@ -3,8 +3,10 @@ require([
     "esri/views/SceneView",
     "esri/layers/GeoJSONLayer",
     "esri/widgets/Legend",
-    "esri/widgets/LayerList"
-  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList) {
+    "esri/widgets/LayerList",
+    "esri/request"
+
+  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList, esriRequest) {
 
   // symbology
   var symbology = function (type, color, width, style, op) {
@@ -19,7 +21,6 @@ require([
 
   var vrachtRoutesLayer = new GeoJSONLayer({
     url: "https://map.data.amsterdam.nl/maps/hoofdroutes?service=WFS&request=GetFeature&version=2.0.0&typenames=vrachtroutes&outputformat=geojson&srsname=EPSG:4326",
-    copyright: "Vrachtroute Stadsdeel Centrum >7.5 ton",
     title: "Vrachtroutes",
     renderer: {
       type: "unique-value",
@@ -36,6 +37,26 @@ require([
      defaultSymbol: symbology("simple-fill", [125, 255, 13, 0.2], "1px", "solid"),
      defaultLabel: "Milieuzone"
     }
+  });
+
+  // var cityLayer = new GeoJSONLayer({
+  //   url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=GEBIED_STADSDELEN&THEMA=gebiedsindeling",
+  //   title: "Stadsdelen",
+  //   // renderer: {
+  //   //   type: "unique-value",
+  //   //   defaultSymbol: symbology("simple-fill", [30, 144, 255, 0.2], "1px", "solid"),
+  //   //   defaultLabel: "Stadsdeel"
+  //   //  }
+  //  });
+
+  var url = "https://maps.amsterdam.nl/_php/haal_objecten.php?TABEL=GEBIED_STADSDELEN&THEMA=gebiedsindeling";
+
+  esriRequest(url, {
+    responseType: "json"
+  }).then(function(response){
+    // The requested data
+    var geoJson = response.data;
+    console.log(response);
   });
 
   var map = new Map({

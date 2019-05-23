@@ -24,7 +24,7 @@ require([
     title: "Vrachtroutes",
     renderer: {
       type: "unique-value",
-      defaultSymbol: symbology("simple-line", "red", "1px", "solid"),
+      defaultSymbol: symbology("simple-line", "blue", "1px", "solid"),
       defaultLabel: "Vrachtroute Stadsdeel Centrum >7.5 ton"
     }
  });
@@ -38,6 +38,20 @@ require([
      defaultLabel: "Milieuzone"
     }
   });
+
+
+  var OpAfstapplaatsen = new GeoJSONLayer({
+    url: "https://api.data.amsterdam.nl/dcatd/datasets/hr5OD_Xsn6ri8w/purls/2",
+    title: "Op & Afstapplaatsen Passagiersvaart"
+   });
+
+
+
+   var VKLichten = new GeoJSONLayer({
+    url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=VERKEERSLICHTEN&THEMA=verkeerslichten",
+    title: "Verkeerslichten"
+   });
+
 
   // var cityLayer = new GeoJSONLayer({
   //   url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=GEBIED_STADSDELEN&THEMA=gebiedsindeling",
@@ -62,7 +76,7 @@ require([
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
-    layers: [vrachtRoutesLayer, milieuzone]
+    layers: [vrachtRoutesLayer, milieuzone, OpAfstapplaatsen, VKLichten]
   });
 
   var view = new SceneView({

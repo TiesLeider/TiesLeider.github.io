@@ -51,40 +51,23 @@ require([
    var OpAfstapplaatsen = new GeoJSONLayer({
      url: "https://api.data.amsterdam.nl/dcatd/datasets/hr5OD_Xsn6ri8w/purls/2",
      title: "Op & Afstapplaatsen Passagiersvaart"
+     renderer: {
+       type: "unique-value",
+       defaultSymbol: symbology("simple-fill", [125, 13, 255, 0.2], "1px", "solid"),
+       defaultLabel: "Op & Afstapplaatsen Passagiersvaart"
+      }
     });
 
+    // var VKLichten = new GeoJSONLayer({
+    //  url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=VERKEERSLICHTEN&THEMA=verkeerslichten",
+    //  title: "Verkeerslichten"
+    // });
 
-
-    var VKLichten = new GeoJSONLayer({
-     url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=VERKEERSLICHTEN&THEMA=verkeerslichten",
-     title: "Verkeerslichten"
-    });
-
-
-  // var test = "https://maps.amsterdam.nl/_php/haal_objecten.php?TABEL=GEBIED_STADSDELEN&THEMA=gebiedsindeling";
-  // var url = Terraformer.ArcGIS.convert({
-  //   "type": "Point",
-  //   "coordinates": [45.5165, -122.6764]
-  // });
-  //
-  // esriRequest(url, {
-  //   responseType: "json"
-  // }).then(function(response){
-  //   // The requested data
-  //   var geoJson = response.data;
-  //   console.log(response);
-  // });
-
-
-  // var vlak = Terraformer.ArcGIS.convert({
-  //   type: "Polygon"
-  //   coordinates
-  // });
 
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
-    layers: [VrachtRoutesLayer, Milieuzone, Parkeervlakken, OpAfstapplaatsen, VKLichten]
+    layers: [VrachtRoutesLayer, Milieuzone, Parkeervlakken, OpAfstapplaatsen]
   });
 
   var view = new SceneView({
@@ -114,3 +97,24 @@ require([
     });
   });
 });
+
+
+// var test = "https://maps.amsterdam.nl/_php/haal_objecten.php?TABEL=GEBIED_STADSDELEN&THEMA=gebiedsindeling";
+// var url = Terraformer.ArcGIS.convert({
+//   "type": "Point",
+//   "coordinates": [45.5165, -122.6764]
+// });
+//
+// esriRequest(url, {
+//   responseType: "json"
+// }).then(function(response){
+//   // The requested data
+//   var geoJson = response.data;
+//   console.log(response);
+// });
+
+
+// var vlak = Terraformer.ArcGIS.convert({
+//   type: "Polygon"
+//   coordinates
+// });

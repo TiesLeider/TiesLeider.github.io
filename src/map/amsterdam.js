@@ -50,7 +50,7 @@ require([
 
    var OpAfstapplaatsen = new GeoJSONLayer({
      url: "https://api.data.amsterdam.nl/dcatd/datasets/hr5OD_Xsn6ri8w/purls/2",
-     title: "Op & Afstapplaatsen Passagiersvaart"
+     title: "Op & Afstapplaatsen Passagiersvaart",
      renderer: {
        type: "unique-value",
        defaultSymbol: symbology("simple-fill", [125, 13, 255, 0.2], "1px", "solid"),

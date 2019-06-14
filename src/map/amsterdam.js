@@ -13,7 +13,7 @@ require([
   // symbology
   var symbology = function (type, color, width, style, op) {
     const symbology = {
-      type: type, // autocasts as new SimpleLineSymbol()
+      type: type,
       color: color,
       width: width,
       style: style,
@@ -26,7 +26,7 @@ require([
     title: "Vrachtroutes",
     renderer: {
       type: "unique-value",
-      defaultSymbol: symbology("simple-line", "blue", "1px", "solid"),
+      defaultSymbol: symbology("simple-line", "blue", "1px", "cross"),
       defaultLabel: "Vrachtroute Stadsdeel Centrum >7.5 ton"
     }
  });
@@ -36,7 +36,7 @@ require([
    title: "Milieuzone",
    renderer: {
      type: "unique-value",
-     defaultSymbol: symbology("simple-fill", [125, 255, 13, 0.2], "1px", "solid"),
+     defaultSymbol: symbology("simple-fill", [125, 255, 13, 0.2], "1px", "cross"),
      defaultLabel: "Milieuzone"
     }
   });
@@ -56,7 +56,7 @@ require([
      title: "Op & Afstapplaatsen Passagiersvaart",
      renderer: {
        type: "unique-value",
-       defaultSymbol: symbology("simple-marker", "red", "1px", "circle"),
+       defaultSymbol: symbology("simple-marker", [125, 13, 255, 0.2], "1px", "circle"),
        defaultLabel: "Op & Afstapplaatsen Passagiersvaart"
       }
     });

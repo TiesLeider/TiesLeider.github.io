@@ -10,7 +10,6 @@ require([
 
   ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol) {
 
-  // symbology
   var symbology = function (type, color, width, style, op) {
     const symbology = {
       type: type,
@@ -26,7 +25,7 @@ require([
     title: "Vrachtroutes",
     renderer: {
       type: "unique-value",
-      defaultSymbol: symbology("simple-line", "blue", "1px", "cross"),
+      defaultSymbol: symbology("simple-line", "blue", "1px", "solid"),
       defaultLabel: "Vrachtroute Stadsdeel Centrum >7.5 ton"
     }
  });

@@ -38,15 +38,15 @@ require([
     }
   });
 
-  var Parkeervakken = new GeoJSONLayer({
-    url: "https://api.data.amsterdam.nl/parkeervakken/parkeervakken/",
-    title: "parkeervakken",
-    renderer: {
-      type: "unique-value",
-      defaultSymbol: symbology("simple-fill", [255, 125, 13, 0.2], "1px", "solid"),
-      defaultLabel: "parkeervak"
-     }
-   });
+  // var Parkeervakken = new GeoJSONLayer({
+  //   url: "https://api.data.amsterdam.nl/parkeervakken/parkeervakken/",
+  //   title: "parkeervakken",
+  //   renderer: {
+  //     type: "unique-value",
+  //     defaultSymbol: symbology("simple-fill", [255, 125, 13, 0.2], "1px", "solid"),
+  //     defaultLabel: "parkeervak"
+  //    }
+  //  });
 
    var OpAfstapplaatsen = new GeoJSONLayer({
      url: "https://api.data.amsterdam.nl/dcatd/datasets/hr5OD_Xsn6ri8w/purls/2",
@@ -67,7 +67,7 @@ require([
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
-    layers: [VrachtRoutesLayer, Milieuzone, Parkeervakken, OpAfstapplaatsen]
+    layers: [VrachtRoutesLayer, Milieuzone, OpAfstapplaatsen]
   });
 
   var view = new SceneView({

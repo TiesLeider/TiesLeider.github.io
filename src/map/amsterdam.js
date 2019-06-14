@@ -3,10 +3,9 @@ require([
     "esri/views/SceneView",
     "esri/layers/GeoJSONLayer",
     "esri/widgets/Legend",
-    "esri/widgets/LayerList",
-    "esri/request"
+    "esri/widgets/LayerList"
 
-  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList, esriRequest) {
+  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList) {
 
   // symbology
   var symbology = function (type, color, width, style, op) {
@@ -39,30 +38,41 @@ require([
     }
   });
 
-  // var cityLayer = new GeoJSONLayer({
-  //   url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=GEBIED_STADSDELEN&THEMA=gebiedsindeling",
-  //   title: "Stadsdelen",
-  //   // renderer: {
-  //   //   type: "unique-value",
-  //   //   defaultSymbol: symbology("simple-fill", [30, 144, 255, 0.2], "1px", "solid"),
-  //   //   defaultLabel: "Stadsdeel"
-  //   //  }
-  //  });
+  var parkeervlakken = new GeoJSONLayer({
+    url: "https://api.data.amsterdam.nl/parkeervakken/parkeervakken/",
+    title: "parkeervlakken",
+    renderer: {
+      type: "unique-value",
+      defaultSymbol: symbology("simple-fill", [255, 125, 13, 0.2], "1px", "solid"),
+      defaultLabel: "parkeervlak"
+     }
+   });
 
-  var url = "https://maps.amsterdam.nl/_php/haal_objecten.php?TABEL=GEBIED_STADSDELEN&THEMA=gebiedsindeling";
 
-  esriRequest(url, {
-    responseType: "json"
-  }).then(function(response){
-    // The requested data
-    var geoJson = response.data;
-    console.log(response);
-  });
+  // var test = "https://maps.amsterdam.nl/_php/haal_objecten.php?TABEL=GEBIED_STADSDELEN&THEMA=gebiedsindeling";
+  // var url = Terraformer.ArcGIS.convert({
+  //   "type": "Point",
+  //   "coordinates": [45.5165, -122.6764]
+  // });
+  //
+  // esriRequest(url, {
+  //   responseType: "json"
+  // }).then(function(response){
+  //   // The requested data
+  //   var geoJson = response.data;
+  //   console.log(response);
+  // });
+
+
+  // var vlak = Terraformer.ArcGIS.convert({
+  //   type: "Polygon"
+  //   coordinates
+  // });
 
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
-    layers: [vrachtRoutesLayer, milieuzone]
+    layers: [vrachtRoutesLayer, milieuzone, parkeervakken]
   });
 
   var view = new SceneView({

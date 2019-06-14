@@ -18,17 +18,17 @@ require([
     return symbology;
   };
 
-  var vrachtRoutesLayer = new GeoJSONLayer({
+  var VrachtRoutesLayer = new GeoJSONLayer({
     url: "https://map.data.amsterdam.nl/maps/hoofdroutes?service=WFS&request=GetFeature&version=2.0.0&typenames=vrachtroutes&outputformat=geojson&srsname=EPSG:4326",
     title: "Vrachtroutes",
     renderer: {
       type: "unique-value",
-      defaultSymbol: symbology("simple-line", "red", "1px", "solid"),
+      defaultSymbol: symbology("simple-line", "blue", "1px", "solid"),
       defaultLabel: "Vrachtroute Stadsdeel Centrum >7.5 ton"
     }
  });
 
- var milieuzone = new GeoJSONLayer({
+ var Milieuzone = new GeoJSONLayer({
    url: "https://map.data.amsterdam.nl/maps/milieuzones?service=WFS&request=GetFeature&version=2.0.0&typenames=milieuzones&outputformat=geojson&srsname=epsg:4326",
    title: "Milieuzone",
    renderer: {
@@ -38,7 +38,7 @@ require([
     }
   });
 
-  var parkeervlakken = new GeoJSONLayer({
+  var Parkeervlakken = new GeoJSONLayer({
     url: "https://api.data.amsterdam.nl/parkeervakken/parkeervakken/",
     title: "parkeervlakken",
     renderer: {
@@ -47,6 +47,18 @@ require([
       defaultLabel: "parkeervlak"
      }
    });
+
+   var OpAfstapplaatsen = new GeoJSONLayer({
+     url: "https://api.data.amsterdam.nl/dcatd/datasets/hr5OD_Xsn6ri8w/purls/2",
+     title: "Op & Afstapplaatsen Passagiersvaart"
+    });
+
+
+
+    var VKLichten = new GeoJSONLayer({
+     url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=VERKEERSLICHTEN&THEMA=verkeerslichten",
+     title: "Verkeerslichten"
+    });
 
 
   // var test = "https://maps.amsterdam.nl/_php/haal_objecten.php?TABEL=GEBIED_STADSDELEN&THEMA=gebiedsindeling";
@@ -72,7 +84,7 @@ require([
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
-    layers: [vrachtRoutesLayer, milieuzone, parkeervakken]
+    layers: [VrachtRoutesLayer, Milieuzone, Parkeervakken, OpAfstapplaatsen, VKLichten]
   });
 
   var view = new SceneView({

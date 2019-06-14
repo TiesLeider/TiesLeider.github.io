@@ -56,7 +56,7 @@ require([
      title: "Op & Afstapplaatsen Passagiersvaart",
      renderer: {
        type: "unique-value",
-       defaultSymbol: symbology("simple-marker", "red", "1px", "solid"),
+       defaultSymbol: symbology("simple-marker", "red", "1px", "circle"),
        defaultLabel: "Op & Afstapplaatsen Passagiersvaart"
       }
     });

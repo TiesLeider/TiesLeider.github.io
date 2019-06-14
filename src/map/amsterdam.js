@@ -3,9 +3,12 @@ require([
     "esri/views/SceneView",
     "esri/layers/GeoJSONLayer",
     "esri/widgets/Legend",
-    "esri/widgets/LayerList"
+    "esri/widgets/LayerList",
+    "esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleFillSymbol"
 
-  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList) {
+  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol) {
 
   // symbology
   var symbology = function (type, color, width, style, op) {

@@ -1,6 +1,6 @@
 require([
     "esri/Map",
-    "esri/views/SceneView",
+    "esri/views/MapView",
     "esri/layers/GeoJSONLayer",
     "esri/widgets/Legend",
     "esri/widgets/LayerList",
@@ -8,9 +8,16 @@ require([
     "esri/symbols/SimpleMarkerSymbol",
     "esri/symbols/SimpleFillSymbol"
 
-  ], function(Map, SceneView, GeoJSONLayer, Legend, LayerList, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol) {
+  ], function(Map, MapView, GeoJSONLayer, Legend, LayerList, SimpleMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol) {
 
-  var symbology = function (type, color, width, style, op) {
+  const RefreshEveryThirtySeconds = 0.5;
+  const NoRefresh = 0;
+
+  const BaseMap = new Map({
+    basemap: "topo-vector",
+  });
+
+  const Symbology = function (type, color, width, style, op) {
     const symbology = {
       type: type,
       color: color,
@@ -20,25 +27,30 @@ require([
     return symbology;
   };
 
-  var VrachtRoutesLayer = new GeoJSONLayer({
+  const VrachtRoutesLayer = new GeoJSONLayer({
     url: "https://map.data.amsterdam.nl/maps/hoofdroutes?service=WFS&request=GetFeature&version=2.0.0&typenames=vrachtroutes&outputformat=geojson&srsname=EPSG:4326",
     title: "Vrachtroutes",
     renderer: {
       type: "unique-value",
-      defaultSymbol: symbology("simple-line", "blue", "1px", "solid"),
+      defaultSymbol: Symbology("simple-line", "blue", "1px", "solid"),
       defaultLabel: "Vrachtroute Stadsdeel Centrum >7.5 ton"
     }
  });
 
- var Milieuzone = new GeoJSONLayer({
+  BaseMap.layers.add(VrachtRoutesLayer);
+
+
+ const Milieuzone = new GeoJSONLayer({
    url: "https://map.data.amsterdam.nl/maps/milieuzones?service=WFS&request=GetFeature&version=2.0.0&typenames=milieuzones&outputformat=geojson&srsname=epsg:4326",
    title: "Milieuzone",
    renderer: {
      type: "unique-value",
-     defaultSymbol: symbology("simple-fill", [125, 255, 13, 0.2], "1px", "cross"),
+     defaultSymbol: Symbology("simple-fill", [100, 255, 13, 0.3], "1px", "solid"),
      defaultLabel: "Milieuzone"
     }
   });
+
+  BaseMap.layers.add(Milieuzone);
 
   // var Parkeervakken = new GeoJSONLayer({
   //   url: "https://api.data.amsterdam.nl/parkeervakken/parkeervakken/",
@@ -50,41 +62,42 @@ require([
   //    }
   //  });
 
-   var OpAfstapplaatsen = new GeoJSONLayer({
+   const OpAfstapplaatsen = new GeoJSONLayer({
      url: "https://api.data.amsterdam.nl/dcatd/datasets/hr5OD_Xsn6ri8w/purls/2",
      title: "Op & Afstapplaatsen Passagiersvaart",
      renderer: {
        type: "unique-value",
-       defaultSymbol: symbology("simple-marker", [125, 13, 255, 0.2], "1px", "circle"),
+       defaultSymbol: Symbology("simple-marker", [255, 50, 13, 0.7], "1px", "circle"),
        defaultLabel: "Op & Afstapplaatsen Passagiersvaart"
       }
     });
+
+    OpAfstapplaatsen.minScale = 50000;
+    BaseMap.layers.add(OpAfstapplaatsen);
 
     // var VKLichten = new GeoJSONLayer({
     //  url: "https://maps.amsterdam.nl/open_geodata/geojson.php?KAARTLAAG=VERKEERSLICHTEN&THEMA=verkeerslichten",
     //  title: "Verkeerslichten"
     // });
 
+  const View = new MapView({
+      container: "viewDiv",
+      map: BaseMap,
+      center: [4.895168, 52.370216],
+      zoom: 12
+    });
 
-  var map = new Map({
-    basemap: "hybrid",
-    ground: "world-elevation",
-    layers: [VrachtRoutesLayer, Milieuzone, OpAfstapplaatsen]
-  });
 
-  var view = new SceneView({
-    container: "viewDiv",
-    map: map
-  });
+
 
   const legend = new LayerList({
-  view: view,
+  view: View,
   style: "card",
   listItemCreatedFunction: function(event) {
-    const item = event.item;
-    if (item.layer.type != "group") {
+    const Item = event.item;
+    if (Item.layer.type != "group") {
       // don't show legend twice
-      item.panel = {
+      Item.panel = {
         content: "legend",
         open: false,
       };
@@ -92,12 +105,9 @@ require([
   }
 });
 
-  view.ui.add(legend, "bottom-left");
-  view.when(function() {
-    milieuzone.when(function() {
-      view.goTo(milieuzone.fullExtent);
-    });
-  });
+  View.ui.add(legend, "bottom-left");
+  View.showZoomSlider = true;
+
 });
 
 

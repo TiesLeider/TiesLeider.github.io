@@ -84,7 +84,7 @@ require([
   var map = new Map({
     basemap: "hybrid",
     ground: "world-elevation",
-    layers: [VrachtRoutesLayer, Milieuzone, Parkeervakken, OpAfstapplaatsen, VKLichten]
+    layers: [VrachtRoutesLayer, Milieuzone, Parkeervlakken, OpAfstapplaatsen, VKLichten]
   });
 
   var view = new SceneView({
